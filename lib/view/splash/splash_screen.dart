@@ -13,6 +13,8 @@ class SplashScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: IntroductionScreen(
+          dotsFlex: 2,
+          dotsContainerDecorator: BoxDecoration(),
           controlsMargin: EdgeInsets.all(8),
         
           done: CircleAvatar(

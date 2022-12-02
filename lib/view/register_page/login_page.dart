@@ -28,6 +28,7 @@ class LoginPage extends StatelessWidget {
         ),
         body: Container(
           height: size.height,
+          
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -41,19 +42,52 @@ class LoginPage extends StatelessWidget {
                           fit: BoxFit.fitWidth)),
                 ),
               ),
-              
-            Positioned(
-                    bottom: 0,
-                    child: Obx(()=> loginController.signIn.value? SignInWidget(size: size,):SignUpWidget(size: size,)),
-              ),
-                    Positioned( bottom : 0,child: Container(child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Obx(()=>
-                           Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text("I'm a new user."),loginController.signIn.value?InkWell(onTap: (){loginController.signIn.value = false;}, child: Text("Sign Up",style: TextStyle(color: Colors.purple,fontWeight: FontWeight.w600),)): InkWell(onTap: (){loginController.signIn.value = true;}, child: Text("Sign In",style: TextStyle(color: Colors.purple,fontWeight: FontWeight.w600),)) ],)
+              Positioned(
+                bottom: 0,
+                child: Obx(() => loginController.signIn.value
+                    ? SignInWidget(
+                        size: size,
                       )
-                    )))
+                    : SignUpWidget(
+                        size: size,
+                      )),
+              ),
+              Positioned(
+                  bottom: 0,
+                  child: Container(
+                      child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Obx(() => Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("I'm a new user."),
+                                  loginController.signIn.value
+                                      ? InkWell(
+                                          onTap: () {
+                                            loginController.signIn.value =
+                                                false;
+                                          },
+                                          child: Text(
+                                            "Sign Up",
+                                            style: TextStyle(
+                                                color: Colors.purple,
+                                                fontWeight: FontWeight.w600),
+                                          ))
+                                      : InkWell(
+                                          onTap: () {
+                                            loginController.signIn.value = true;
+                                          },
+                                          child: Text(
+                                            "Sign In",
+                                            style: TextStyle(
+                                                color: Colors.purple,
+                                                fontWeight: FontWeight.w600),
+                                          ))
+                                ],
+                              )))))
             ],
           ),
+          
         ),
       ),
     );

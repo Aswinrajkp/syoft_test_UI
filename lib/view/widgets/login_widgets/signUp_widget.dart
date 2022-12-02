@@ -3,23 +3,32 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syoft_ui/controller/login_page_controller.dart';
 
-class SignUpWidget extends StatelessWidget {
+class SignUpWidget extends StatefulWidget {
   SignUpWidget({Key? key, required this.size}) : super(key: key);
 
   final size;
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   static final formKey = GlobalKey<FormState>();
+
+  @override
+  State<SignUpWidget> createState() => _SignUpWidgetState();
+}
+
+class _SignUpWidgetState extends State<SignUpWidget> {
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController numberController = TextEditingController();
+
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     LoginController loginController = Get.find<LoginController>();
     return Container(
-      height: size.height * .78,
-      width: size.width,
+      height: widget.size.height * .70,
+      width: widget.size.width,
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
         borderRadius: const BorderRadius.only(
@@ -28,12 +37,12 @@ class SignUpWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30),
         child: Form(
-          key: formKey,
+          key: SignUpWidget.formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: size.height * .05,
+                  height: widget.size.height * .05,
                 ),
                 Text(
                   "Create Account",
@@ -76,6 +85,7 @@ class SignUpWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 12),
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter the phone number";
@@ -147,7 +157,7 @@ class SignUpWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (formKey.currentState!.validate()) {
+                    if (SignUpWidget.formKey.currentState!.validate()) {
                       loginController.signUpDataPassing(
                           nameController.text,
                           numberController.text,
@@ -156,8 +166,8 @@ class SignUpWidget extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    height: size.height * .06,
-                    width: size.width * .70,
+                    height: widget.size.height * .06,
+                    width: widget.size.width * .70,
                     decoration: BoxDecoration(
                         color: Colors.purple,
                         borderRadius: BorderRadius.circular(10)),
