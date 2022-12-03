@@ -13,6 +13,7 @@ class LoginPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        // resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -26,24 +27,22 @@ class LoginPage extends StatelessWidget {
                 color: Colors.black,
               )),
         ),
-        body: Container(
-          height: size.height,
-          
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  height: size.height * .45,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("asset/Images/signinPage.jpeg"),
-                          fit: BoxFit.fitWidth)),
-                ),
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: size.height * .45,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("asset/Images/signinPage.jpeg"),
+                        fit: BoxFit.fitWidth)),
               ),
-              Positioned(
-                bottom: 0,
+            ),
+            Positioned(
+              bottom: 0,
+              child: SingleChildScrollView(
                 child: Obx(() => loginController.signIn.value
                     ? SignInWidget(
                         size: size,
@@ -52,42 +51,41 @@ class LoginPage extends StatelessWidget {
                         size: size,
                       )),
               ),
-              Positioned(
-                  bottom: 0,
-                  child: Container(
-                      child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Obx(() => Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("I'm a new user."),
-                                  loginController.signIn.value
-                                      ? InkWell(
-                                          onTap: () {
-                                            loginController.signIn.value =
-                                                false;
-                                          },
-                                          child: Text(
-                                            "Sign Up",
-                                            style: TextStyle(
-                                                color: Colors.purple,
-                                                fontWeight: FontWeight.w600),
-                                          ))
-                                      : InkWell(
-                                          onTap: () {
-                                            loginController.signIn.value = true;
-                                          },
-                                          child: Text(
-                                            "Sign In",
-                                            style: TextStyle(
-                                                color: Colors.purple,
-                                                fontWeight: FontWeight.w600),
-                                          ))
-                                ],
-                              )))))
-            ],
-          ),
-          
+            ),
+            // Positioned(
+            //     bottom: 0,
+            //     child: Container(
+            //         child: Padding(
+            //             padding: const EdgeInsets.all(16.0),
+            //             child: Obx(() => Row(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Text("I'm a new user."),
+            //                     loginController.signIn.value
+            //                         ? InkWell(
+            //                             onTap: () {
+            //                               loginController.signIn.value =
+            //                                   false;
+            //                             },
+            //                             child: Text(
+            //                               "Sign Up",
+            //                               style: TextStyle(
+            //                                   color: Colors.purple,
+            //                                   fontWeight: FontWeight.w600),
+            //                             ))
+            //                         : InkWell(
+            //                             onTap: () {
+            //                               loginController.signIn.value = true;
+            //                             },
+            //                             child: Text(
+            //                               "Sign In",
+            //                               style: TextStyle(
+            //                                   color: Colors.purple,
+            //                                   fontWeight: FontWeight.w600),
+            //                             ))
+            //                   ],
+            //                 )))))
+          ],
         ),
       ),
     );

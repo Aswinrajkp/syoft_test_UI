@@ -8,7 +8,7 @@ class SignUpWidget extends StatefulWidget {
 
   final size;
 
-  static final formKey = GlobalKey<FormState>();
+ 
 
   @override
   State<SignUpWidget> createState() => _SignUpWidgetState();
@@ -23,11 +23,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
   TextEditingController passwordController = TextEditingController();
 
+  static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     LoginController loginController = Get.find<LoginController>();
     return Container(
-      height: widget.size.height * .70,
+      // height: widget.size.height * .70,
       width: widget.size.width,
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
@@ -36,9 +38,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30),
-        child: Form(
-          key: SignUpWidget.formKey,
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
             child: Column(
               children: [
                 SizedBox(
@@ -157,7 +159,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (SignUpWidget.formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       loginController.signUpDataPassing(
                           nameController.text,
                           numberController.text,
@@ -179,6 +181,35 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     ),
                   ),
                 ),
+                Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Obx(() => Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("I'm a new user."),
+                            loginController.signIn.value
+                                ? InkWell(
+                                    onTap: () {
+                                      loginController.signIn.value = false;
+                                    },
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                          color: Colors.purple,
+                                          fontWeight: FontWeight.w600),
+                                    ))
+                                : InkWell(
+                                    onTap: () {
+                                      loginController.signIn.value = true;
+                                    },
+                                    child: Text(
+                                      "Sign In",
+                                      style: TextStyle(
+                                          color: Colors.purple,
+                                          fontWeight: FontWeight.w600),
+                                    ))
+                          ],
+                        )))
               ],
             ),
           ),

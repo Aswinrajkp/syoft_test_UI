@@ -114,6 +114,35 @@ class SignInWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Obx(() => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("I'm a new user."),
+                          loginController.signIn.value
+                              ? InkWell(
+                                  onTap: () {
+                                    loginController.signIn.value = false;
+                                  },
+                                  child: Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                        color: Colors.purple,
+                                        fontWeight: FontWeight.w600),
+                                  ))
+                              : InkWell(
+                                  onTap: () {
+                                    loginController.signIn.value = true;
+                                  },
+                                  child: Text(
+                                    "Sign In",
+                                    style: TextStyle(
+                                        color: Colors.purple,
+                                        fontWeight: FontWeight.w600),
+                                  ))
+                        ],
+                      )))
             ],
           ),
         ),
